@@ -1,9 +1,12 @@
 import { useContext } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 
 const Login = () => {
-  const { signInUser } = useContext(AuthContext)
+  const { signInUser ,signInWithGoogle} = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
@@ -14,8 +17,24 @@ const Login = () => {
     signInUser(email, password)
       .then(result => {
         console.log(result.user)
+        // to reset the login field
+        e.target.reset();
+        navigate('/');
       })
       .catch(error => console.log(error.messege))
+
+  }
+
+  const handleGoogleSignIn = () =>{
+
+    signInWithGoogle()
+    .then(result=>{
+      console.log(result.user)
+    })
+    .catch(error =>{
+      console.log(error.messege)
+    })
+
 
   }
 
@@ -50,6 +69,7 @@ const Login = () => {
               <button className="btn btn-primary">Login</button>
             </div>
           </form>
+          <button onClick={handleGoogleSignIn} className="bg-green-400 py-2">logIn with Google</button>
         </div>
       </div>
     </div>

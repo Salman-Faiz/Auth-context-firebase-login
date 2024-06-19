@@ -8,6 +8,7 @@ const Navbar = () => {
     
     <li><NavLink to={'/'}>home</NavLink></li>
     <li><NavLink to={'/login'}>login</NavLink></li>
+    <li><NavLink to={'/register'}>Register</NavLink></li>
     </>
     return (
         <div className="navbar bg-base-100">

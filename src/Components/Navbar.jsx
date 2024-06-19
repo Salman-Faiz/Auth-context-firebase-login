@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom"
 import { AuthContext } from "../Providers/AuthProvider";
 import auth from "../firebase/firebase.config";
+import OrderList from './OrderList';
 
 
 const Navbar = () => {
@@ -14,6 +15,7 @@ const Navbar = () => {
     <li><NavLink to={'/'}>home</NavLink></li>
     <li><NavLink to={'/login'}>login</NavLink></li>
     <li><NavLink to={'/register'}>Register</NavLink></li>
+    <li><NavLink to={'/orders'}>Order List</NavLink></li>
     </>
 
    const handleSignOutUser = ()=>{

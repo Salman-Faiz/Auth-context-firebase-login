@@ -7,16 +7,21 @@ export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
+    // declare state to prevent redirect another page
+    const [loading,setLoading]=useState(true);
 
     const createUser = (email, password) => {
+        setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password)
     }
 
     const signInUser = (email, password) => {
+        setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
     }
 
     const signOutUser = () =>{
+        setLoading(true)
         return signOut(auth);
     }
 
@@ -27,6 +32,7 @@ const AuthProvider = ({ children }) => {
        const unSubscribe = onAuthStateChanged(auth, currentUser => {
             console.log('current value of the current user', currentUser);
             setUser(currentUser);
+            setLoading(false);
             return ()=>{
                 unSubscribe();
             }
@@ -37,7 +43,7 @@ const AuthProvider = ({ children }) => {
 
 
     // const authInfo = { name : 'salman faiz'}
-    const authInfo = { user, createUser, signInUser , signOutUser }
+    const authInfo = { user, createUser, signInUser , signOutUser ,loading}
     return (
         <AuthContext.Provider value={authInfo}>
 

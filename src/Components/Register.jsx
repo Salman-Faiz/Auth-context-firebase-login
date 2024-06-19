@@ -1,12 +1,29 @@
+import { useContext } from "react";
+import { AuthContext } from "../Providers/AuthProvider";
+
 
 
 const Register = () => {
-    const handleRegisterSubmit = e =>{
 
+
+    const { createUser } = useContext(AuthContext)
+    // console.log(authInfo);
+
+    const handleRegisterSubmit = e =>{
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;
         console.log(email, password)
+
+        // create user in firebase
+        createUser(email,password)
+        .then(result =>{
+            console.log(result.user)
+        })
+    .catch(error =>{
+        console.error(error.messege)
+    })
+
     }
     return (
         <div className="  bg-blue-200 py-28">
